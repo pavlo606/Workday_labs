@@ -5,6 +5,8 @@ import cors from 'cors';
 import UserRouter from './routes/userRoutes.js'
 import reportRouter from './routes/reportRoutes.js'
 import reportDetailsRouter from './routes/reportDetailsRoutes.js'
+import './database/connect.js'
+import './csv/import_csv.js'
 
 const app = express();
 const PORT = process.env.PORT || 3000;
