@@ -1,6 +1,5 @@
 import { STRING, DECIMAL } from "sequelize";
 import seq from "../database/connect.js";
-// import User from "./user.js";
 
 const ReportDetails = seq.define("report_details", {
     item_name : {
@@ -17,6 +16,5 @@ const ReportDetails = seq.define("report_details", {
     }
 });
 
-// ReportDetails.hasMany(User, {as: "users"})
 
 export default ReportDetails;
