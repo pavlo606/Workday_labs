@@ -16,6 +16,7 @@ const getOneReport = (req, res) => {
     const {
         params: { reportId },
     } = req;
+    console.log(req.session.userId)
     if (!reportId) {
         res.status(400).send({
             status: 'FAILED',
@@ -62,7 +63,7 @@ const getReportDetailsForReport = (req, res) => {
 
 const createNewReport = (req, res) => {
     const { body } = req;
-    console.log(body)
+    console.log(req)
     ReportService.createNewReport(body, (err, result) => {
         if (err) {
             return res.status(err.status || 500).send({
