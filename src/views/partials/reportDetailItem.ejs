@@ -1,0 +1,12 @@
+<tr>
+    <th scope="row"><%= index + 1 %></th>
+    <td><%= item_name %></td>
+    <td><%= amount %></td>
+    <td><%= currency %></td>
+    <td>
+        <div class="d-flex justify-content-end" id="reportDetail<%= id %>">
+            <button class="btn btn-outline-primary" onclick="onEditDetail('<%= id %>')">Edit</button>
+            <button class="btn btn-outline-danger" onclick="onDeleteDetail('<%= id %>')">Delete</button>
+        </div>
+    </td>
+</tr>

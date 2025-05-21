@@ -1,6 +1,6 @@
-import { compare, genSalt, hash as _hash } from 'bcrypt';
+import { compare, genSalt, hash as _hash } from "bcrypt";
 
-import userRepository from '../database/user.js';
+import userRepository from "../database/user.js";
 
 const saltRounds = 10; // The number of rounds for hashing the password
 
@@ -25,25 +25,31 @@ const getReportsForUser = (id, callback) => {
 const loginUser = (credentials, callback) => {
     userRepository.loginUser(credentials, (err, result) => {
         if (result) {
-            compare(credentials.password, result.password_hash, (bcrypt_err, authoristaion_result) => {
-                if (bcrypt_err) {
-                    console.error('Error comparing passwords:', bcrypt_err);
-                    callback(bcrypt_err, result);
-                    return;
-                }
+            compare(
+                credentials.password,
+                result.password_hash,
+                (bcrypt_err, authoristaion_result) => {
+                    if (bcrypt_err) {
+                        console.error("Error comparing passwords:", bcrypt_err);
+                        callback(bcrypt_err, result);
+                        return;
+                    }
 
-                if (authoristaion_result) {
-                    console.log('Passwords match! User authenticated.');
-                    delete result.dataValues.password_hash
-                    callback(err, result);
-                } else {
-                    console.log('Passwords do not match! Authentication failed.');
-                    err = {status: 401, message: 'Invalid credentials'};
-                    callback(err, null);
+                    if (authoristaion_result) {
+                        console.log("Passwords match! User authenticated.");
+                        delete result.dataValues.password_hash;
+                        callback(err, result);
+                    } else {
+                        console.log(
+                            "Passwords do not match! Authentication failed."
+                        );
+                        err = { status: 401, message: "Invalid credentials" };
+                        callback(err, null);
+                    }
                 }
-            });
+            );
         } else {
-            err = {status: 401, message: 'Invalid credentials'};
+            err = { status: 401, message: "Invalid credentials" };
             callback(err, null);
         }
     });
@@ -61,7 +67,9 @@ const createNewUser = (newUser, callback) => {
             delete newUser.password;
 
             userRepository.createNewUser(newUser, (err, result) => {
-                delete result.dataValues.password_hash
+                if (!err) {
+                    delete result.dataValues.password_hash;
+                }
                 callback(err, result);
             });
         });

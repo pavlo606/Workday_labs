@@ -1,4 +1,3 @@
-// import fs from "fs";
 import { createObjectCsvWriter } from "csv-writer";
 
 const generateCSV = () => {
