@@ -4,7 +4,8 @@ import User from "../models/user.js";
 import userService from "../services/userService.js";
 import Report from "../models/report.js";
 import ReportDetails from "../models/reportDetails.js";
-import generateCSV from "./csv_generator.js"
+import generateCSV from "./csv_generator.js";
+import strategy from "../outputStrategies/strategy.js";
 
 const results = [];
 
@@ -15,7 +16,7 @@ const createUserAsync = (userData) => {
             resolve(result);
         });
     });
-}
+};
 
 const writeToDB = async () => {
     generateCSV();
@@ -59,10 +60,13 @@ const writeToDB = async () => {
                     currency,
                     report_id: report.id,
                 });
+                strategy.log(
+                    `Imported: [User: ${user.username}], [Report: ${report.title}], [Item: ${row.item_name}]`
+                );
             }
 
-            console.log("Import completed");
+            strategy.log("Import completed");
         });
-}
+};
 
 export default writeToDB;
