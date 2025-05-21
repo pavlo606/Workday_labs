@@ -1,0 +1,51 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">EJS Is Fun</a>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+        </li>
+    </ul>
+</nav> -->
+
+<div class="container">
+    <header
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+    >
+        <div class="col-md-3 mb-2 mb-md-0">
+            <a href="/">
+                <img
+                    src="/images/Nulp_logo_ukr.svg"
+                    style="width: 50px"
+                    alt=""
+                />
+            </a>
+        </div>
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a class="nav-link px-2" href="/api/view/report">Reports</a></li>
+        </ul>
+        
+        <div class="col-md-3 text-end">
+            <% if (userId) { %>
+            <div>
+                <%= userId %>
+                <button onclick="logoutUser()" type="button" class="btn btn-outline-primary me-2">
+                    Logout
+                </button>
+            </div>
+            <% } else { %>
+            <div>
+                <a
+                    href="/api/view/login"
+                    type="button"
+                    class="btn btn-outline-primary me-2"
+                >
+                    Login
+                </a>
+            </div>
+            <% } %>
+        </div>
+    </header>
+</div>

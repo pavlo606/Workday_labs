@@ -63,7 +63,10 @@ const getReportDetailsForReport = (req, res) => {
 
 const createNewReport = (req, res) => {
     const { body } = req;
-    console.log(req)
+    if (!body.user_id) {
+        body.user_id = req.session.userId
+    }
+    console.log(body)
     ReportService.createNewReport(body, (err, result) => {
         if (err) {
             return res.status(err.status || 500).send({

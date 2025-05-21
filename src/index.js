@@ -28,6 +28,8 @@ app.use(
 app.set("view engine", "ejs");
 app.set("views", "./src/views");
 
+app.use(express.static("./public"));
+
 app.use("/api/user", UserRouter);
 app.use("/api/report", reportRouter);
 app.use("/api/reportdetails", reportDetailsRouter);
@@ -42,7 +44,7 @@ app.get("/api/database/generatedata", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-    res.render("index");
+    res.render("pages/index");
 });
 
 app.listen(PORT, () => {

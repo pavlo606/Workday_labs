@@ -89,11 +89,13 @@ const createNewUser = (req, res) => {
     const { body } = req;
     userService.createNewUser(body, (err, result) => {
         if (err) {
+            if (err.name === "SequelizeUniqueConstraintError") err.status = 409
             return res.status(err.status || 500).send({
                 status: "FAILED",
                 data: { error: err },
             });
         }
+        req.session.userId = result.id;
         res.status(201).send({
             status: "OK",
             data: result,
@@ -153,6 +155,7 @@ export default {
     getOneUser,
     getReportsForUser,
     loginUser,
+    logout,
     createNewUser,
     updateOneUser,
     deleteOneUser,

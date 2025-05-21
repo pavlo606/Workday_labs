@@ -12,8 +12,13 @@ const getOneUser = async (id, callback) => {
 
 const getReportsForUser = async (id, callback) => {
     const user = await User.findByPk(id)
-    const reports = await user.getReports()
-    callback(null, reports);
+    try {
+        const reports = await user.getReports()
+        callback(null, reports);
+    } catch (err) {
+        console.log(err)
+        callback(null, []);
+    }
 };
 
 const loginUser = async (credentials, callback) => {
@@ -23,8 +28,12 @@ const loginUser = async (credentials, callback) => {
 
 
 const createNewUser = async (newUser, callback) => {
-    const result = await User.create(newUser)
-    callback(null, result)
+    try {
+        const result = await User.create(newUser)
+        callback(null, result)
+    } catch (err) {
+        callback(err, null)
+    }
 };
 
 const updateOneUser = async (id, changes, callback) => {
